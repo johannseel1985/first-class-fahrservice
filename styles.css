@@ -160,19 +160,38 @@ img{max-width:100%;display:block}
   .vehicle-image:before{display:none}
 }
 @media (max-width:640px){
-  .site-header{height:70px;padding:0 18px}
-  .brand-text small{display:none}
-  .brand-text strong{font-size:13px}
-  .header-cta{padding:8px 12px}
-  .hero{min-height:100svh}
-  .hero-image{background-position:58% center}
-  .hero-shade{background:linear-gradient(90deg,rgba(0,0,0,.86),rgba(0,0,0,.42)),linear-gradient(0deg,rgba(0,0,0,.93),transparent 55%)}
-  .hero-content{width:calc(100% - 36px);padding-bottom:44px}
-  .hero h1{font-size:54px}
-  .hero-copy{font-size:17px}
-  .hero-actions{flex-direction:column;align-items:stretch}
-  .trust-row{gap:10px;font-size:10px}
-  .trust-row i{width:20px}
+  .site-header{height:64px;padding:0 16px;background:linear-gradient(to bottom,rgba(6,6,6,.96),rgba(6,6,6,.72),transparent)}
+  .brand{gap:10px}
+  .brand-mark{font-size:21px;padding:2px 6px}
+  .brand-text small{display:block;font-size:7px;letter-spacing:.12em;margin-top:2px}
+  .brand-text strong{font-size:12px;letter-spacing:.06em}
+  .header-cta{padding:7px 11px;font-size:12px}
+
+  /* Mobile Hero: Fahrzeug bewusster kleiner und vollständiger darstellen */
+  .hero{min-height:100svh;align-items:flex-end;background:#080808}
+  .hero-image{
+    background-size:auto 49svh;
+    background-position:center 78px;
+    background-repeat:no-repeat;
+    transform:none;
+  }
+  .hero-shade{
+    background:
+      linear-gradient(180deg,rgba(0,0,0,.08) 8%,rgba(0,0,0,.12) 34%,rgba(0,0,0,.70) 57%,rgba(0,0,0,.96) 82%),
+      linear-gradient(90deg,rgba(0,0,0,.28),rgba(0,0,0,.05) 65%,rgba(0,0,0,.18));
+  }
+  .hero-content{
+    width:calc(100% - 32px);
+    padding:44svh 0 28px;
+  }
+  .eyebrow{font-size:10px;letter-spacing:.18em}
+  .hero h1{font-size:clamp(46px,13.8vw,58px);line-height:.91;margin:10px 0 16px;max-width:100%}
+  .hero-copy{font-size:16px;line-height:1.48;max-width:95%;margin:0}
+  .hero-actions{flex-direction:column;align-items:stretch;gap:10px;margin-top:20px}
+  .btn{min-height:46px}
+  .trust-row{gap:9px;font-size:9px;margin-top:24px;letter-spacing:.12em}
+  .trust-row i{width:18px}
+
   .section{width:calc(100% - 36px);padding:72px 0}
   .section h2{font-size:42px}
   .intro>p{margin-top:0;font-size:17px}
