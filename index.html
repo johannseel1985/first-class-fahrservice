@@ -6,12 +6,12 @@
   <title>First Class auf der Straße | Premium Fahrservice Baden-Baden</title>
   <meta name="description" content="Premium Fahrservice von Witalij Hansen rund um Baden-Baden. Flughafentransfers, Businessfahrten und Privatfahrten im Porsche Cayenne.">
   <meta name="theme-color" content="#080808">
-    <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content="noindex, nofollow">
   <meta property="og:title" content="First Class auf der Straße">
   <meta property="og:description" content="Premium Fahrservice rund um Baden-Baden. Diskret, komfortabel und zuverlässig.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/cayenne-front-3q.jpeg">
-  <link rel="preload" as="image" href="assets/cayenne-front-3q-original.jpg" type="image/jpeg">
+  <link rel="preload" as="image" href="assets/cayenne-hero-three-quarter.jpg" type="image/jpeg">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -43,7 +43,7 @@
   <main id="main-content">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-media" aria-hidden="true">
-        <img src="assets/cayenne-front-3q-original.jpg" alt="" fetchpriority="high">
+        <img src="assets/cayenne-hero-three-quarter.jpg" alt="" fetchpriority="high" decoding="async">
       </div>
       <div class="hero-shade" aria-hidden="true"></div>
 
@@ -88,9 +88,12 @@
       <div class="section-shell service-journey">
         <div class="service-gallery" aria-hidden="true">
           <div class="service-gallery-frame">
-            <img class="service-gallery-image is-active" data-service-media="airport" src="assets/cayenne-front-3q-original.jpg" alt="">
-            <img class="service-gallery-image" data-service-media="business" src="assets/cayenne-front-original.jpg" alt="" loading="lazy" decoding="async">
-            <img class="service-gallery-image service-gallery-image-portrait" data-service-media="private" src="assets/witalij-hansen-original.jpg" alt="" loading="lazy" decoding="async">
+            <img class="service-gallery-image is-active" data-service-media="airport" src="assets/cayenne-business-front.jpg" alt="" decoding="async">
+            <picture>
+              <source media="(max-width: 767px)" srcset="assets/cayenne-airport-side.jpg">
+              <img class="service-gallery-image" data-service-media="business" src="assets/cayenne-front-3q-original.jpg" alt="" decoding="async">
+            </picture>
+            <img class="service-gallery-image" data-service-media="private" src="assets/cayenne-private-rear-three-quarter.jpg" alt="" decoding="async">
             <div class="service-gallery-shade"></div>
             <div class="service-gallery-caption">
               <span class="service-gallery-number">01</span>
@@ -101,7 +104,6 @@
 
         <div class="service-stories">
           <article class="service-story is-active" data-service="airport">
-            <img class="service-mobile-image" src="assets/cayenne-front-3q-original.jpg" alt="Porsche Cayenne für einen Flughafentransfer" loading="lazy" decoding="async">
             <div class="service-copy reveal">
               <p class="service-number">01 · Flughafentransfer</p>
               <h3>Vom ersten Meter bis zum Terminal.</h3>
@@ -118,7 +120,6 @@
           </article>
 
           <article class="service-story" data-service="business">
-            <img class="service-mobile-image" src="assets/cayenne-front-original.jpg" alt="Porsche Cayenne für eine Businessfahrt" loading="lazy" decoding="async">
             <div class="service-copy reveal">
               <p class="service-number">02 · Businessfahrten</p>
               <h3>Einsteigen. Durchatmen. Vorbereitet ankommen.</h3>
@@ -132,7 +133,6 @@
           </article>
 
           <article class="service-story" data-service="private">
-            <img class="service-mobile-image service-mobile-image-portrait" src="assets/witalij-hansen-original.jpg" alt="Witalij Hansen, Ihr persönlicher Fahrer" loading="lazy" decoding="async">
             <div class="service-copy reveal">
               <p class="service-number">03 · Privatfahrten</p>
               <h3>Ihr Abend endet so entspannt, wie er begonnen hat.</h3>
@@ -147,7 +147,10 @@
     <section class="vehicle" id="fahrzeug" aria-labelledby="vehicle-title">
       <div class="vehicle-sticky">
         <div class="vehicle-frame" aria-hidden="true">
-          <img src="assets/cayenne-front-original.jpg" alt="" loading="lazy" decoding="async">
+          <picture>
+            <source media="(max-width: 767px)" srcset="assets/cayenne-vehicle-rear.jpg">
+            <img src="assets/cayenne-overhead.jpg" alt="" loading="lazy" decoding="async">
+          </picture>
         </div>
         <div class="vehicle-shade" aria-hidden="true"></div>
         <div class="section-shell vehicle-copy reveal">
@@ -191,7 +194,7 @@
           <p>Abholort, Ziel, Datum und Uhrzeit genügen für eine erste Einschätzung. Ihre Anfrage ist unverbindlich.</p>
           <div class="contact-direct">
             <a href="tel:+4915126388936"><small>Telefon &amp; WhatsApp</small><strong>+49 151 26388936</strong></a>
-            <a href="mailto:Info-hansen@gmx.de"><small>E-Mail</small><strong>Info-hansen@gmx.de</strong></a>
+            <a href="mailto:info_hansen@gmx.de"><small>E-Mail</small><strong>info_hansen@gmx.de</strong></a>
           </div>
         </div>
 
@@ -242,7 +245,7 @@
     </div>
     <p>© <span id="year"></span> · Premium Fahrservice rund um Baden-Baden</p>
     <nav aria-label="Rechtliche Hinweise">
-      <a href="mailto:Info-hansen@gmx.de">E-Mail</a>
+      <a href="mailto:info_hansen@gmx.de">E-Mail</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
     </nav>

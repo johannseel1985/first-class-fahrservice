@@ -7,6 +7,7 @@ const hero = document.querySelector('.hero');
 const vehicle = document.querySelector('.vehicle');
 const serviceStories = Array.from(document.querySelectorAll('[data-service]'));
 const serviceImages = Array.from(document.querySelectorAll('[data-service-media]'));
+const serviceGallery = document.querySelector('.service-gallery');
 const galleryNumber = document.querySelector('.service-gallery-number');
 const galleryName = document.querySelector('.service-gallery-name');
 
@@ -36,9 +37,20 @@ function activateService(name) {
 }
 
 function updateServiceStory() {
-  if (!serviceStories.length || window.innerWidth < 768) return;
+  if (!serviceStories.length) return;
 
-  const viewportCenter = window.innerHeight * .5;
+  const isMobile = window.innerWidth < 768;
+  const galleryRect = serviceGallery?.getBoundingClientRect();
+  const galleryBottom = galleryRect
+    ? clamp(galleryRect.bottom, 0, window.innerHeight)
+    : window.innerHeight * .5;
+  const viewportCenter = isMobile
+    ? clamp(
+        galleryBottom + (window.innerHeight - galleryBottom) * .48,
+        window.innerHeight * .64,
+        window.innerHeight * .86
+      )
+    : window.innerHeight * .5;
   let closestStory = serviceStories[0];
   let closestDistance = Number.POSITIVE_INFINITY;
 
@@ -55,6 +67,12 @@ function updateServiceStory() {
 
   activateService(closestStory.dataset.service);
 }
+
+serviceImages.forEach((image) => {
+  const decodeImage = () => image.decode?.().catch(() => {});
+  if (image.complete) decodeImage();
+  else image.addEventListener('load', decodeImage, { once: true });
+});
 
 function updateScrollEffects() {
   frameRequested = false;
