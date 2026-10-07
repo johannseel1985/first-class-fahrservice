@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Designprüfung | First Class</title>
+<style>body{margin:0;background:#dedfd8;font:13px system-ui;color:#172017}header{padding:14px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}button,a{border:1px solid #81907e;padding:8px 12px;background:white;color:#172017;text-decoration:none}iframe{display:block;width:390px;height:844px;border:0;margin:0 auto;max-width:100%}.note{margin-left:auto}</style>
+</head>
+<body>
+<header>
+<strong>Prüffassung · 7. Oktober 2026</strong>
+<button data-width="320">320 px</button>
+<button data-width="390">390 px</button>
+<button data-width="768">768 px</button>
+<button data-width="1280">Desktop</button>
+<a href="index.html">Website öffnen ↗</a>
+<span class="note">Impressum und Datenschutz enthalten offene Angaben.</span>
+</header>
+<iframe title="Website-Vorschau" src="index.html">
+</iframe>
+<script>document.querySelectorAll('[data-width]').forEach(button=>button.addEventListener('click',()=>{document.querySelector('iframe').style.width=button.dataset.width+'px';}));</script>
+</body>
+</html>

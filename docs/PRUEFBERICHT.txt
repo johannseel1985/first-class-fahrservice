@@ -1,0 +1,119 @@
+FIRST CLASS AUF DER STRASSE
+Website-Prüfung und Überarbeitung · 07.10.2026
+
+STATUS
+Die technische und gestalterische Prüffassung ist umgesetzt. Sie ersetzt die
+bisherige öffentlich erreichbare Website noch nicht. Impressum und Datenschutz
+sind konkrete Entwürfe mit offen gekennzeichneten Angaben. Ein geschäftlicher
+Start darf erst nach deren Klärung erfolgen. Eine Garantie vollständiger
+Rechtssicherheit kann diese technische und redaktionelle Prüfung nicht leisten.
+
+BEFUND UND UMSETZUNG
+1. Positionierung: Die bisherige Hauptgrafik und fast alle Leistungsbilder
+zeigten großflächig das Fahrzeug. Die neue Website stellt Fahrtanlass, Region
+und den persönlichen Fahrer in den Mittelpunkt. Der Porsche Cayenne wird
+nur noch im kompakten Komfortabschnitt beschrieben.
+
+2. Bildrechte: Ein neuer Hintergrund klärt keine Nutzungsrechte am übernommenen
+Porsche-Foto. Die neue Auslieferung enthält deshalb keinerlei Porsche-Fotos
+oder deren Bearbeitungen. Stattdessen drei echte Ortsaufnahmen mit dokumentierter
+CC-BY-SA-Lizenz, Namensnennung, Original- und Lizenzlinks, Bearbeitungshinweisen
+und Weitergabe der Bildfassungen unter gleicher Lizenz. Die Bilder zeigen
+Kurhaus, Trinkhalle und Flughafen Stuttgart. Kein angebliches Kundenfahrzeug
+wurde mit KI erfunden. Die Zustimmung des Fotografen zur werblichen Verwendung
+des bereits vorhandenen Witalij-Porträts bleibt nachzuweisen.
+
+3. Gestaltung und Bewegung: Dunkelgrün/Schwarz, Creme und Gold entwickeln die
+bestehende Optik weiter. Der Einstieg bewegt sich direkt mit dem Scrollen.
+Der Leistungsbereich zeigt drei wechselnde Orte mit Zoombewegungen und
+Kapitelanzeige. Hinzu kommen regionaler Bildabschnitt, dezente Einblendungen
+und eine Scrollfortschrittslinie. Kein Autoplay, keine Audiospur und kein
+Abfangen des Mausrads. Systemeinstellung für reduzierte Bewegung wird respektiert.
+Ein zusätzlicher Schalter reduziert Bewegung ohne dauerhafte Speicherung.
+Die Wirkung ist eine scrollgesteuerte Bildergeschichte, kein echtes Fahrvideo.
+
+4. Inhalte: Neue Texte aus eigener Formulierung, ein Ablauf in drei Schritten
+und sechs FAQs. ELS wurde nur zur Einordnung branchenüblicher Informationen
+angesehen. Keine Text- oder Bildübernahme. Kein Personenschutz, keine
+Sicherheitsdienste, keine Flotten-, Bewertungs- oder 24/7-Versprechen.
+Unbestätigte maximale Kapazität wird nicht mehr beworben; Anfragen für 1–4
+Fahrgäste sind zur Abstimmung möglich.
+
+5. Anfrage: E-Mail und Telefon prominent. Der Anfragehelfer erzeugt zunächst
+sichtbaren Text mit anschließendem E-Mail-Link. Keine Übermittlung an einen
+Formularserver und kein automatischer Versand. Kopieren mit verständlichem
+Fallback. WhatsApp nur freiwilliger externer Link ohne Formularwerte in der URL.
+Leere Orte, ungültige Fahrgastzahlen und vergangene Daten werden abgefangen.
+Eine Anfrage wird klar von der erst später bestätigten Fahrt unterschieden.
+
+6. Datenschutz: Keine Analytics, Trackingpixel, Drittanbieterfonts, eingebetteten
+Karten oder Messenger-Widgets. Kein Cookie, Local Storage oder Session Storage
+im Website-Code. Selbst gehostete Bilder und Systemschriften. Beschreibung
+von Browserverarbeitung, Zwischenablage, mailto und WhatsApp. Hostingangaben
+müssen an den endgültigen Vertrag angepasst werden. GMX/WhatsApp-Nutzung und
+betriebliche Speicherfristen sind durch den Betreiber zu prüfen.
+
+7. Bedienbarkeit: Native mobile Navigation, Sprunglink, sichtbarer Tastaturfokus,
+echte Labels, FAQ über native Details-Elemente, Meldungen als Live-Region,
+Bildabmessungen gegen Layoutsprünge, reduzierte Bewegung, Lesbarkeit und
+Kontakt ohne JavaScript. Größere Eingabeschrift auf Mobilgeräten.
+
+8. Suchmaschinen und Technik: Aussagekräftiger Titel und Beschreibung,
+semantische Überschriften, lokale Bilddateien als WebP, responsive Bildauswahl,
+Lazy Loading unterhalb des Einstiegs, priorisiertes Hero-Bild, Favicon und
+404-Seite. Keine Framework- oder Animationsbibliotheken. Sicherheitsrichtlinie
+blockiert Verbindungen zu Formularservern und externen Skripten. Der
+Produktionsbuild erzeugt Canonical, Open-Graph-Bild, Robots-Datei und Sitemap
+für die erst noch zu bestätigende echte Domain. Bis dahin absichtlich noindex.
+
+OFFENE ANGABEN FÜR DEN START
+A. Unternehmergenehmigung für den Mietwagenverkehr nach PBefG, Gültigkeit und
+zuständige Aufsichtsbehörde samt Anschrift/Kontakt. Ein persönlicher
+Personenbeförderungsschein ist kein Ersatz für die Unternehmergenehmigung.
+Fahrerlaubnis und gewerbliche Versicherung ebenfalls betrieblich prüfen.
+
+B. USt-IdNr./W-IdNr. sofern vorhanden und etwaige Registereintragung. Bitte
+keine private Steuer-ID veröffentlichen. Für die Verbraucherstreitbeilegung:
+Beschäftigtenzahl zum maßgeblichen Stichtag sowie etwaige Teilnahmeverpflichtung
+oder freiwillige Teilnahme klären. Keine solche Entscheidung wurde erfunden.
+Anwendbarkeit/Ausnahme des BFSG anhand tatsächlicher Unternehmensgröße und
+angebotener Leistungen klären; nicht pauschal als zertifiziert barrierefrei bewerben.
+
+C. Endgültige Domain und Hostingvertrag. GitHub Pages verbietet in seinen
+Bedingungen bestimmte vorwiegend auf kommerzielle Transaktionen gerichtete
+Websites. Für diesen auf Fahrtanfragen ausgerichteten Auftritt ist ein ausdrücklich
+für geschäftliche Websites zulässiges Hosting der belastbarere Weg. Keine
+kostenpflichtige Domain oder Hostingbestellung wurde ausgelöst. GitHub kann
+weiterhin den Quellcode verwalten. Bei einem Umzug: Serverstandorte,
+Protokollierung/Löschfristen, Vertragsrollen, AV-Vertrag und ggf.
+Drittlandgrundlagen klären, danach Hostingtext anpassen.
+
+D. Rechte an Witalijs Porträt, erforderliche Fotografennennung und Zustimmung
+zur werblichen Nutzung. Eigene Fotos des tatsächlichen Porsche Cayenne sind
+für einen späteren dezenten Fahrzeugeinsatz ideal. Hintergrundmontagen wären
+dann mit diesen eigenen beziehungsweise lizenzierten Ausgangsfotos möglich.
+
+E. Angebot bestätigen: tatsächliches Modell, maximal mögliche Fahrgastzahl,
+Gepäck, Kindersitze, Bediengebiet, Fahrten nach Frankreich/Schweiz,
+Zeiten/Verfügbarkeit, Bedingungen für Wartezeiten, Stornierung und Bezahlung.
+Keine Preise oder Leistungszusagen wurden erfunden. Grenzüberschreitende
+Beförderung ist anhand Genehmigung, Versicherung und Zielstaat zu prüfen.
+
+F. Abschließende Freigabe der Texte und Unternehmensdaten durch Witalij Hansen.
+Die frühere E-Mail-Adresse mit Bindestrich wurde NICHT wieder eingeführt:
+Aktueller Stand ist info_hansen@gmx.de (mit Unterstrich).
+
+QUELLEN (geprüft am 07.10.2026)
+UrhG § 23: https://www.gesetze-im-internet.de/urhg/__23.html
+DDG § 5: https://www.gesetze-im-internet.de/ddg/BJNR0950B0024.html
+PBefG § 2: https://www.gesetze-im-internet.de/pbefg/__2.html
+TDDDG § 25: https://www.gesetze-im-internet.de/ttdsg/__25.html
+VSBG § 36: https://www.gesetze-im-internet.de/vsbg/__36.html
+BFSG § 3: https://www.gesetze-im-internet.de/bfsg/__3.html
+DSGVO: https://eur-lex.europa.eu/legal-content/DE/TXT/?uri=CELEX:32016R0679
+Hostinggrenzen: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits
+GitHub-Datenschutz: https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement
+GMX: https://www.gmx.net/impressum/
+WhatsApp: https://www.whatsapp.com/legal/privacy-policy-eea
+Datenschutzaufsicht: https://www.baden-wuerttemberg.datenschutz.de/beschwerde/
+Bildquellen: siehe bildnachweise.html und docs/image-licenses.json.

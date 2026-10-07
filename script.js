@@ -1,171 +1,69 @@
-document.documentElement.classList.add('js');
-
-const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-const topbar = document.getElementById('topbar');
-const hero = document.querySelector('.hero');
-const vehicle = document.querySelector('.vehicle');
-const serviceStories = Array.from(document.querySelectorAll('[data-service]'));
-const serviceImages = Array.from(document.querySelectorAll('[data-service-media]'));
-const serviceGallery = document.querySelector('.service-gallery');
-const galleryNumber = document.querySelector('.service-gallery-number');
-const galleryName = document.querySelector('.service-gallery-name');
-
-const serviceLabels = {
-  airport: { number: '01', name: 'Flughafentransfer' },
-  business: { number: '02', name: 'Businessfahrten' },
-  private: { number: '03', name: 'Privatfahrten' }
-};
-
-let activeService = 'airport';
-let frameRequested = false;
-
-function activateService(name) {
-  if (!serviceLabels[name] || activeService === name) return;
-  activeService = name;
-
-  serviceStories.forEach((story) => {
-    story.classList.toggle('is-active', story.dataset.service === name);
-  });
-
-  serviceImages.forEach((image) => {
-    image.classList.toggle('is-active', image.dataset.serviceMedia === name);
-  });
-
-  if (galleryNumber) galleryNumber.textContent = serviceLabels[name].number;
-  if (galleryName) galleryName.textContent = serviceLabels[name].name;
+'use strict';
+(() => {
+const root=document.documentElement;
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+let manualReduced=false;
+const motionOff=()=>manualReduced||reduced.matches;
+const clamp=(v,a=0,b=1)=>Math.max(a,Math.min(b,v));
+const hero=document.querySelector('.hero');
+const region=document.querySelector('.regional');
+const stories=[...document.querySelectorAll('[data-service]')];
+const images=[...document.querySelectorAll('[data-service-media]')];
+const gallery=document.querySelector('.service-gallery');
+const topbar=document.getElementById('topbar');
+const labels={airport:['01','Flughafentransfer'],business:['02','Businessfahrten'],private:['03','Private Anlässe']};
+let ticking=false;
+function update(){
+ ticking=false;const vh=window.innerHeight;
+ root.style.setProperty('--progress',clamp(window.scrollY/Math.max(1,document.documentElement.scrollHeight-vh)));
+ topbar?.classList.toggle('is-scrolled',window.scrollY>30);
+ if(hero&&!motionOff()){
+ const r=hero.getBoundingClientRect();
+ if(r.bottom>0&&r.top<vh){const p=clamp(-r.top/Math.max(1,hero.offsetHeight-vh));hero.style.setProperty('--hero-scale',1.04+p*.16);hero.style.setProperty('--hero-y',`${-p*22}px`);hero.style.setProperty('--hero-copy-y',`${-p*45}px`);hero.style.setProperty('--hero-opacity',1-p*.18);}
+ }
+ if(region&&!motionOff()){const r=region.getBoundingClientRect();if(r.bottom>0&&r.top<vh)region.style.setProperty('--region-y',`${((vh-r.top)/(vh+r.height)-.5)*70}px`);}
+ if(stories.length){
+ const mobile=window.innerWidth<=700;const reference=mobile?Math.min(vh*.8,72+(gallery?.offsetHeight||0)+(vh-72-(gallery?.offsetHeight||0))*.4):vh*.52;
+ let active=stories[0],distance=Infinity;
+ for(const story of stories){const r=story.getBoundingClientRect();const d=Math.abs((r.top+r.height*.45)-reference);if(d<distance){distance=d;active=story;}}
+ const key=active.dataset.service;const r=active.getBoundingClientRect();const p=clamp((reference-r.top)/r.height);
+ gallery?.style.setProperty('--chapter-progress',p);
+ images.forEach(img=>{const isActive=img.dataset.serviceMedia===key;img.classList.toggle('is-active',isActive);if(isActive)img.style.transform=motionOff()?'none':`scale(${1.025+p*.075}) translateY(${-p*10}px)`;});
+ const count=document.querySelector('.service-gallery-number'),name=document.querySelector('.service-gallery-name');if(count)count.textContent=labels[key][0];if(name)name.textContent=labels[key][1];
+ }
 }
-
-function updateServiceStory() {
-  if (!serviceStories.length) return;
-
-  const isMobile = window.innerWidth < 768;
-  const galleryRect = serviceGallery?.getBoundingClientRect();
-  const galleryBottom = galleryRect
-    ? clamp(galleryRect.bottom, 0, window.innerHeight)
-    : window.innerHeight * .5;
-  const viewportCenter = isMobile
-    ? clamp(
-        galleryBottom + (window.innerHeight - galleryBottom) * .48,
-        window.innerHeight * .64,
-        window.innerHeight * .86
-      )
-    : window.innerHeight * .5;
-  let closestStory = serviceStories[0];
-  let closestDistance = Number.POSITIVE_INFINITY;
-
-  serviceStories.forEach((story) => {
-    const rect = story.getBoundingClientRect();
-    const storyCenter = rect.top + rect.height * .5;
-    const distance = Math.abs(storyCenter - viewportCenter);
-
-    if (distance < closestDistance) {
-      closestDistance = distance;
-      closestStory = story;
-    }
-  });
-
-  activateService(closestStory.dataset.service);
+function request(){if(!ticking){ticking=true;requestAnimationFrame(update);}}
+const reveals=[...document.querySelectorAll('.reveal')];
+if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>{for(const e of entries){if(e.isIntersecting){e.target.classList.add('is-visible');observer.unobserve(e.target);}}},{threshold:.08});reveals.forEach(el=>observer.observe(el));}else{reveals.forEach(el=>el.classList.add('is-visible'));}
+const motionButton=document.getElementById('motionToggle');
+function syncMotion(){const off=motionOff();root.classList.toggle('no-motion',off);if(off)reveals.forEach(el=>el.classList.add('is-visible'));if(motionButton){motionButton.setAttribute('aria-pressed',String(off));motionButton.textContent=reduced.matches?'Systemeinstellung: wenig Bewegung':off?'Bewegung aktivieren':'Bewegung reduzieren';motionButton.disabled=reduced.matches;}request();}
+motionButton?.addEventListener('click',()=>{manualReduced=!manualReduced;syncMotion();});reduced.addEventListener('change',syncMotion);
+window.addEventListener('scroll',request,{passive:true});window.addEventListener('resize',request,{passive:true});
+const menu=document.querySelector('.mobile-nav');
+menu?.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.open=false;}));
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&menu?.open){menu.open=false;menu.querySelector('summary').focus();}});
+document.addEventListener('click',event=>{if(menu?.open&&!menu.contains(event.target))menu.open=false;});
+document.querySelectorAll('[data-kind]').forEach(a=>a.addEventListener('click',()=>{const select=document.getElementById('kind');if(select)select.value=a.dataset.kind;}));
+const form=document.getElementById('requestForm');
+if(form){
+const from=form.elements.from,to=form.elements.to,date=form.elements.date,people=form.elements.people;
+const status=document.getElementById('formStatus'),result=document.getElementById('requestResult'),text=document.getElementById('requestText'),email=document.getElementById('preparedEmail');
+function dateMin(){const now=new Date();date.min=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;}
+dateMin();date.addEventListener('focus',dateMin);
+form.addEventListener('submit',e=>e.preventDefault());
+[from,to].forEach(input=>input.addEventListener('input',()=>input.setCustomValidity('')));
+function prepare(){
+ dateMin();[from,to].forEach(input=>input.setCustomValidity(input.value.trim()?'':'Bitte geben Sie einen Ort an.'));
+ if(!form.reportValidity())return null;
+ const data=new FormData(form);const formattedDate=date.value?date.value.split('-').reverse().join('.'):'Noch offen';
+ const lines=['Hallo Herr Hansen,','ich möchte unverbindlich folgende Fahrt anfragen:','',`Anlass: ${data.get('kind')}`,`Abholort: ${from.value.trim()}`,`Ziel: ${to.value.trim()}`,`Datum: ${formattedDate}`,`Uhrzeit: ${data.get('time')||'Noch offen'}`,`Fahrgäste: ${people.value||'Noch offen'}`];
+ const note=String(data.get('note')||'').trim();if(note)lines.push(`Weitere Wünsche: ${note}`);lines.push('','Bitte teilen Sie mir die Verfügbarkeit und den Preis mit.','Vielen Dank!');
+ const body=lines.join('\n');text.value=body;email.href=`mailto:info_hansen@gmx.de?subject=${encodeURIComponent('Unverbindliche Fahrtanfrage')}&body=${encodeURIComponent(body)}`;result.hidden=false;return body;
 }
-
-serviceImages.forEach((image) => {
-  const decodeImage = () => image.decode?.().catch(() => {});
-  if (image.complete) decodeImage();
-  else image.addEventListener('load', decodeImage, { once: true });
-});
-
-function updateScrollEffects() {
-  frameRequested = false;
-  const scrollTop = window.scrollY || document.documentElement.scrollTop;
-  const scrollRange = Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
-  document.documentElement.style.setProperty('--scroll-progress', (scrollTop / scrollRange).toFixed(4));
-
-  if (topbar) topbar.classList.toggle('is-scrolled', scrollTop > 20);
-
-  if (!prefersReducedMotion.matches && hero) {
-    const heroRect = hero.getBoundingClientRect();
-    const progress = clamp(-heroRect.top / Math.max(heroRect.height, 1));
-    hero.style.setProperty('--hero-scale', (1.025 + progress * .075).toFixed(4));
-    hero.style.setProperty('--hero-copy-shift', `${(progress * 64).toFixed(1)}px`);
-    hero.style.setProperty('--hero-copy-opacity', (1 - progress * .76).toFixed(3));
-  }
-
-  if (!prefersReducedMotion.matches && vehicle) {
-    const vehicleRect = vehicle.getBoundingClientRect();
-    const travel = Math.max(vehicle.offsetHeight - window.innerHeight, 1);
-    const progress = clamp(-vehicleRect.top / travel);
-    vehicle.style.setProperty('--vehicle-scale', (1.01 + progress * .085).toFixed(4));
-    vehicle.style.setProperty('--vehicle-shift', `${(-progress * 12).toFixed(1)}px`);
-  }
-
-  updateServiceStory();
+document.getElementById('emailRequest').addEventListener('click',()=>{if(!prepare())return;status.textContent='Ihr Text ist vorbereitet. Öffnen Sie unten Ihr E-Mail-Programm. Es wurde noch keine Nachricht gesendet.';result.scrollIntoView({behavior:motionOff()?'instant':'smooth',block:'nearest'});email.focus({preventScroll:true});});
+document.getElementById('copyRequest').addEventListener('click',async()=>{const body=prepare();if(!body)return;try{if(!navigator.clipboard?.writeText)throw new Error('Clipboard unavailable');await navigator.clipboard.writeText(body);status.textContent='Anfragetext kopiert. Sie können ihn jetzt in eine E-Mail oder Nachricht einfügen.';}catch{status.textContent='Bitte den markierten Text selbst kopieren und in Ihre Nachricht einfügen.';text.focus();text.select();}});
+form.querySelectorAll('input,select,textarea:not([readonly])').forEach(el=>el.addEventListener('input',()=>{if(!result.hidden){result.hidden=true;status.textContent='Angaben geändert. Bitte den Anfragetext erneut vorbereiten.';}}));
 }
-
-function requestScrollUpdate() {
-  if (frameRequested) return;
-  frameRequested = true;
-  window.requestAnimationFrame(updateScrollEffects);
-}
-
-const revealElements = Array.from(document.querySelectorAll('.reveal'));
-
-if (prefersReducedMotion.matches || !('IntersectionObserver' in window)) {
-  revealElements.forEach((element) => element.classList.add('is-visible'));
-} else {
-  const revealObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-      entry.target.classList.add('is-visible');
-      observer.unobserve(entry.target);
-    });
-  }, {
-    rootMargin: '0px 0px -12% 0px',
-    threshold: .12
-  });
-
-  revealElements.forEach((element) => revealObserver.observe(element));
-}
-
-window.addEventListener('scroll', requestScrollUpdate, { passive: true });
-window.addEventListener('resize', requestScrollUpdate, { passive: true });
-requestScrollUpdate();
-
-const requestForm = document.getElementById('requestForm');
-
-if (requestForm) {
-  requestForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(requestForm);
-    const from = String(formData.get('from') || '').trim();
-    const to = String(formData.get('to') || '').trim();
-    const date = String(formData.get('date') || '');
-    const time = String(formData.get('time') || '');
-    const people = String(formData.get('people') || '1');
-    const note = String(formData.get('note') || '').trim();
-
-    const lines = [
-      'Hallo Herr Hansen, ich möchte gerne eine Fahrt anfragen.',
-      '',
-      `Abholort: ${from || 'noch offen'}`,
-      `Ziel: ${to || 'noch offen'}`,
-      `Datum: ${date || 'noch offen'}`,
-      `Uhrzeit: ${time || 'noch offen'}`,
-      `Fahrgäste: ${people}`,
-      note ? `Hinweis: ${note}` : ''
-    ].filter(Boolean);
-
-    const url = `https://wa.me/4915126388936?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  });
-}
-
-const dateInput = document.getElementById('date');
-
-if (dateInput) {
-  const now = new Date();
-  dateInput.min = new Date(now.getTime() - now.getTimezoneOffset() * 60000).toISOString().slice(0, 10);
-}
-
-const year = document.getElementById('year');
-if (year) year.textContent = new Date().getFullYear();
+const year=document.getElementById('year');if(year)year.textContent=new Date().getFullYear();
+root.classList.add('js');syncMotion();request();
+})();
