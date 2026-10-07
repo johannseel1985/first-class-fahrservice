@@ -247,7 +247,9 @@
     if (hero) {
       const h = reduce ? 0 : pinned(hero);
       hero.style.setProperty('--h', h.toFixed(4));
-      const b = clamp(Math.min((h - .42) / .16, (1 - h) / .12));
+      const c = 1 - ease(clamp((h - .05) / .3));
+      const b = Math.min(ease(clamp((h - .3) / .24)), 1 - ease(clamp((h - .84) / .16)));
+      hero.style.setProperty('--c', (reduce ? 1 : c).toFixed(3));
       hero.style.setProperty('--b', (reduce ? 0 : b).toFixed(3));
       if (heroVideo) scrubbers.get(heroVideo).set(ease(h));
     }
