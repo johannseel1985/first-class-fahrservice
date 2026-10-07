@@ -13,7 +13,7 @@ Grundlage: `MASTER-PROMPT.md`. Reine HTML/CSS/JavaScript-Seite ohne Cookies, Tra
 - [ ] Genehmigung Mietwagenverkehr (§ 49 PBefG): Behörde, Datum, Aktenzeichen im Impressum
 - [ ] USt-IdNr. eingetragen oder Abschnitt gelöscht
 - [ ] Optional: eigene Fahrzeugfotos als Vorlage für das Video
-- [ ] Fotograf des Porträts geklärt
+
 - [ ] Alle gelb markierten Stellen erledigt
 - [ ] In `index.html` `noindex, nofollow` auf `index, follow` umstellen
 - [ ] Bei eigener Domain: canonical, og:url, og:image und Hosting-Abschnitt im Datenschutz anpassen

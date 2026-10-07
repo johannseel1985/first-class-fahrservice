@@ -23,8 +23,8 @@
   <link rel="preload" href="assets/fonts/inter-Regular.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" href="assets/fonts/lora-italic.woff" as="font" type="font/woff" crossorigin>
   <link rel="preload" as="image" href="assets/video/kurhaus-poster.webp" media="(min-width: 768px)">
-  <link rel="preload" as="image" href="assets/video/kurhaus-poster-m.webp" media="(max-width: 767px)">
-  <link rel="stylesheet" href="styles.css?v=8">
+  <link rel="preload" as="image" href="assets/video/kurhaus-poster-m.webp?v=9" media="(max-width: 767px)">
+  <link rel="stylesheet" href="styles.css?v=9">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -75,10 +75,10 @@
       <div class="hero-stage">
         <div class="media" aria-hidden="true">
           <picture class="media-poster">
-            <source media="(max-width: 767px)" srcset="assets/video/kurhaus-poster-m.webp">
+            <source media="(max-width: 767px)" srcset="assets/video/kurhaus-poster-m.webp?v=9">
             <img src="assets/video/kurhaus-poster.webp" alt="" fetchpriority="high" decoding="async">
           </picture>
-          <video class="scrub" muted playsinline preload="auto" data-src="assets/video/kurhaus.mp4" data-src-m="assets/video/kurhaus-m.mp4"></video>
+          <video class="scrub" muted playsinline preload="auto" data-src="assets/video/kurhaus.mp4" data-src-m="assets/video/kurhaus-m.mp4?v=9"></video>
         </div>
         <div class="hero-shade" aria-hidden="true"></div>
 
@@ -95,7 +95,7 @@
           </div>
         </div>
 
-        <p class="hero-beat" aria-hidden="true"><small>Baden-Baden · 20:15 Uhr</small><span>Ihr Abend beginnt dort,<br><em>wo der Weg schon geregelt ist.</em></span></p>
+        <p class="hero-beat" aria-hidden="true"><span>Ihr Abend beginnt dort,<br><em>wo der Weg schon geregelt ist.</em></span></p>
         <p class="place-tag" aria-hidden="true"><span></span>Kurhaus Baden-Baden</p>
         <div class="scroll-hint" aria-hidden="true"><i></i><span>Scrollen</span></div>
       </div>
@@ -164,7 +164,7 @@
             <picture class="kb"><source media="(max-width: 767px)" srcset="assets/img/allee-abend-m.webp"><img src="assets/img/allee-abend-d.webp" alt="" loading="lazy" decoding="async"></picture>
           </div>
           <div class="scene" data-scene="4">
-            <picture class="kb"><source media="(max-width: 767px)" srcset="assets/img/heimweg-nacht-m.webp"><img src="assets/img/heimweg-nacht-d.webp" alt="" loading="lazy" decoding="async"></picture>
+            <picture class="kb"><source media="(max-width: 767px)" srcset="assets/img/heimweg-nacht-m.webp?v=9"><img src="assets/img/heimweg-nacht-d.webp?v=9" alt="" loading="lazy" decoding="async"></picture>
           </div>
         </div>
         <div class="film-shade" aria-hidden="true"></div>
@@ -226,17 +226,10 @@
           <div class="drive-shade" aria-hidden="true"></div>
           <p class="drive-caption"><span></span>Schwarzwaldhochstraße, zur blauen Stunde</p>
           <p class="drive-note">Abbildung ähnlich</p>
+          <ul class="specs" aria-label="Ausstattung"><li style="--i:0"><strong>4</strong><span>Fahrgäste mit viel Beinfreiheit</span></li><li style="--i:1"><strong>Gepäck</strong><span>Platz für Koffer und Reisegepäck</span></li><li style="--i:2"><strong>Klima</strong><span>Angenehm temperiert zu jeder Jahreszeit</span></li><li style="--i:3"><strong>Wasser</strong><span>Erfrischung an Bord, selbstverständlich</span></li><li style="--i:4"><strong>Ihr Wunsch</strong><span>Kindersitz, Ladekabel oder etwas ganz Persönliches? Fast alles lässt sich einrichten.</span></li></ul>
         </div>
       </div>
-      <div class="shell">
-        <ul class="specs" aria-label="Ausstattung">
-          <li class="reveal"><strong>4</strong><span>Fahrgäste mit viel Beinfreiheit</span></li>
-          <li class="reveal"><strong>Gepäck</strong><span>Platz für Koffer und Reisegepäck</span></li>
-          <li class="reveal"><strong>Klima</strong><span>Angenehm temperiert zu jeder Jahreszeit</span></li>
-          <li class="reveal"><strong>Wasser</strong><span>Erfrischung an Bord, selbstverständlich</span></li>
-          <li class="reveal"><strong>Ihr Wunsch</strong><span>Kindersitz, Ladekabel oder etwas ganz Persönliches? Fast alles lässt sich einrichten.</span></li>
-        </ul>
-      </div>
+      
     </section>
 
     <!-- 6 · LEISTUNGEN: horizontale Galerie -->
@@ -254,7 +247,7 @@
         </div>
         <div class="cards" role="list" data-track>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-flughafen-terminal.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-flughafen.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-flughafen-terminal-m.webp"><img src="assets/img/card-flughafen-terminal.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-flughafen.mp4" data-src-m="assets/video/card-flughafen-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">01</span>
             <div class="card-body">
@@ -265,7 +258,7 @@
             </div>
           </article>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-trinkhalle-kolonnade.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-trinkhalle.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-trinkhalle-kolonnade-m.webp"><img src="assets/img/card-trinkhalle-kolonnade.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-trinkhalle.mp4" data-src-m="assets/video/card-trinkhalle-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">02</span>
             <div class="card-body">
@@ -276,7 +269,7 @@
             </div>
           </article>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-theater-baden-baden.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-theater.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-theater-baden-baden-m.webp"><img src="assets/img/card-theater-baden-baden.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-theater.mp4" data-src-m="assets/video/card-theater-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">03</span>
             <div class="card-body">
@@ -287,7 +280,7 @@
             </div>
           </article>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-leopoldsplatz-brunnen.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-brunnen.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-leopoldsplatz-brunnen-m.webp"><img src="assets/img/card-leopoldsplatz-brunnen.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-brunnen.mp4" data-src-m="assets/video/card-brunnen-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">04</span>
             <div class="card-body">
@@ -298,7 +291,7 @@
             </div>
           </article>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-blick-schwarzwald.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-schwarzwald.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-blick-schwarzwald-m.webp"><img src="assets/img/card-blick-schwarzwald.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-schwarzwald.mp4" data-src-m="assets/video/card-schwarzwald-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">05</span>
             <div class="card-body">
@@ -309,7 +302,7 @@
             </div>
           </article>
           <article class="card" role="listitem" data-card>
-            <div class="card-media"><img src="assets/img/card-allee-abend.webp" alt="" loading="lazy" decoding="async"><video muted playsinline loop preload="none" data-src="assets/video/card-allee.mp4" aria-hidden="true"></video></div>
+            <div class="card-media"><picture><source media="(max-width: 767px)" srcset="assets/img/card-allee-abend-m.webp"><img src="assets/img/card-allee-abend.webp" alt="" loading="lazy" decoding="async"></picture><video muted playsinline loop preload="none" data-src="assets/video/card-allee.mp4" data-src-m="assets/video/card-allee-m.mp4" aria-hidden="true"></video></div>
             <span class="card-sheen" aria-hidden="true"></span>
             <span class="card-big" aria-hidden="true">06</span>
             <div class="card-body">
@@ -436,7 +429,7 @@
           <p class="form-error" id="formError" role="alert" hidden>Bitte geben Sie Abholort und Ziel an.</p>
           <div class="form-actions">
             <button class="btn btn-solid" type="submit" data-channel="whatsapp"><span>Per WhatsApp senden</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
-            <button class="btn btn-ghost" type="submit" data-channel="mail"><span>Per E-Mail senden</span></button>
+            <button class="btn btn-ghost" type="submit" data-channel="mail"><span>Per E-Mail senden</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
           </div>
           <p class="form-note">Ihre Eingaben werden auf dieser Website nicht gespeichert. Beim Absenden öffnet sich WhatsApp oder Ihr E-Mail-Programm mit einer vorbereiteten Nachricht, die Sie vor dem Versand prüfen können. Bei WhatsApp werden Daten an Meta übermittelt. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
         </form>
@@ -455,6 +448,6 @@
 
   <a class="dock-cta" href="#anfrage">Fahrt anfragen</a>
 
-  <script src="script.js?v=8" defer></script>
+  <script src="script.js?v=9" defer></script>
 </body>
 </html>

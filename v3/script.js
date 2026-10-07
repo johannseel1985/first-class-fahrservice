@@ -163,7 +163,7 @@
     const v = $('video', card);
     if (!v) return;
     if (on) {
-      if (!v.src) v.src = v.dataset.src;
+      if (!v.src) v.src = isMobile() && v.dataset.srcM ? v.dataset.srcM : v.dataset.src;
       v.play().then(() => card.classList.add('playing')).catch(() => {});
     } else {
       v.pause();
@@ -304,7 +304,9 @@
       const enter = clamp((vh - r.top) / vh);
       drive.style.setProperty('--v', (reduce ? 1 : ease(enter)).toFixed(4));
       const dv = $('video.scrub', drive);
-      if (dv) scrubbers.get(dv).set(reduce ? 1 : clamp(pinned(drive) * 1.15));
+      const dp = pinned(drive);
+      if (dv) scrubbers.get(dv).set(reduce ? 1 : clamp(dp * 1.35));
+      drive.style.setProperty('--sp', (reduce ? 1 : clamp((dp - .58) / .34)).toFixed(4));
     }
 
     if (gallery) galleryFrame(vh);
