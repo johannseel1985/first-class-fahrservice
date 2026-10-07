@@ -1,35 +1,34 @@
-FIRST CLASS AUF DER STRASSE – WEBSITE
+FIRST CLASS AUF DER STRASSE · Prüffassung vom 07.10.2026
 
-Enthalten:
-- index.html
-- styles.css
-- script.js
-- impressum.html
-- datenschutz.html
-- assets/ mit den bereitgestellten Bildern
+Die Website ist als reine HTML/CSS/JavaScript-Seite umgesetzt.
+Keine Pakete oder kostenpflichtigen Dienste werden für den Betrieb benötigt.
 
-So ansehen:
-1. ZIP-Datei entpacken
-2. index.html doppelklicken
+Zum Ansehen: index.html im Browser öffnen oder einen lokalen Webserver nutzen.
+Für Zwischenablage und korrektes Serververhalten ist HTTPS im Betrieb sinnvoll.
 
-Bereits eingetragen:
-- Witalij Hansen, Einzelunternehmer
-- Am Feldbach 18, 77839 Lichtenau
-- Info-hansen@gmx.de
-- Telefon +49 151 26388936
-- Fahrerlaubnis zur Fahrgastbeförderung: Berechtigung Mietwagen
-- Fahrerlaubnisbehörde: Landratsamt Rastatt
+Prüfpaket erstellen: node tools/build.mjs
+Produktion erstellen: node tools/build.mjs --production
+Der Produktionsbuild ist absichtlich gesperrt, solange in release.json Angaben
+fehlen oder die Rechtstexte data-launch-blocker enthalten.
 
-Vor Veröffentlichung noch ergänzen bzw. prüfen:
-- konkrete gültige Unternehmergenehmigung für den Mietwagenverkehr nach PBefG
-- zuständige Genehmigungs-/Aufsichtsbehörde aus der Unternehmergenehmigung
-- Umsatzsteuer-Identifikationsnummer oder Wirtschafts-Identifikationsnummer, sofern vorhanden
-- Registerangaben nur, sofern tatsächlich eine Registereintragung besteht
-- Datenschutzerklärung an den tatsächlichen Hosting-Anbieter anpassen
-- Gültigkeit der Fahrerlaubnis zur Fahrgastbeförderung vor Veröffentlichung/Fahrbetrieb prüfen
+Die Sperre ersetzt keine Kontrolle am Hosting. Ein manuelles Hochladen der
+Quelldateien oder ein Merge auf einen von GitHub Pages veröffentlichten Branch
+würde die Buildprüfung umgehen. Nicht vor vollständiger Freigabe veröffentlichen.
 
-Technik:
-- reine HTML/CSS/JavaScript-Seite
-- keine Datenbank nötig
-- Anfrageformular öffnet WhatsApp mit vorausgefülltem Text
-- responsive für Smartphone, Tablet und Desktop
+Endgültige Domain in release.json eintragen; sämtliche bestätigten Angaben
+in Impressum/Datenschutz übernehmen und alle offenen Hinweise entfernen.
+Erst danach status auf approved setzen und die dokumentierten Freigaben
+bestätigen. Ausschließlich den Inhalt von dist beim finalen Hoster hochladen.
+Der Produktionsbuild erzeugt die zur Domain passenden SEO-Angaben.
+
+Der bisherige Live-Auftritt wird durch diese Prüffassung nicht automatisch
+ersetzt. Die GitHub-Pages-Hostingbedingungen sind vor geschäftlichem Betrieb
+zu klären; siehe docs/PRUEFBERICHT.txt.
+
+Bilder: CC-BY-SA-Ortsaufnahmen mit öffentlicher Namensnennung und Lizenzlinks.
+Die jeweiligen Bildfassungen bleiben unter der genannten CC-BY-SA-Lizenz.
+Das vorhandene Witalij-Porträt benötigt noch eine bestätigte Fotofreigabe.
+Alte Porsche-Bilder werden nicht in dist übernommen.
+
+Inhalte/Recht: docs/PRUEFBERICHT.txt enthält Befunde, Änderungen und die
+konkreten noch benötigten Unternehmensangaben.

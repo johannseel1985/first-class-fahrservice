@@ -1,0 +1,14 @@
+{
+  "status": "review",
+  "production_url": null,
+  "confirmed": {
+    "passenger_transport_operator_license": false,
+    "supervisory_authority_in_imprint": false,
+    "tax_and_register_details_checked": false,
+    "hosting_contract_and_privacy_finalized": false,
+    "portrait_commercial_usage_rights": false,
+    "service_details_and_capacity": false,
+    "consumer_dispute_information_checked": false,
+    "operator_approved_content": false
+  }
+}
