@@ -536,3 +536,10 @@ img, svg, video { display: block; max-width: 100%; }
   .menu-open .nav { opacity: 1; visibility: visible; transition: opacity .35s, visibility 0s; }
   .menu-open, .menu-open body { overflow: hidden; }
 }
+@media (max-width: 767px) {
+  .drive-stage { align-content: center; }
+  .drive-media { inset: auto; left: 0; right: 0; top: 50%; aspect-ratio: 4 / 3; border-radius: 0; transform: translate3d(0, -50%, 0) scale(calc(.9 + var(--v) * .1)); }
+  .drive-shade { background: none; }
+  .drive-caption { bottom: auto; top: calc(50% + 37.5vw + 18px); left: 20px; right: 20px; line-height: 1.5; }
+  .drive-note { top: calc(50% - 37.5vw - 34px); right: 20px; }
+}
