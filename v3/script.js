@@ -116,6 +116,7 @@
   const clockLabel = $('.hud-label');
   const clockIndex = $('.hud-index');
   const drive = $('[data-drive]');
+  const driveFlow = window.matchMedia('(max-width: 767px), (max-width: 1024px) and (orientation: portrait)');
   const steps = $('[data-steps]');
   const stepItems = $$('.step');
   const airports = $('.airports');
@@ -304,9 +305,18 @@
       const enter = clamp((vh - r.top) / vh);
       drive.style.setProperty('--v', (reduce ? 1 : ease(enter)).toFixed(4));
       const dv = $('video.scrub', drive);
-      const dp = pinned(drive);
-      if (dv) scrubbers.get(dv).set(reduce ? 1 : clamp(dp * 1.35));
-      drive.style.setProperty('--sp', (reduce ? 1 : clamp((dp - .58) / .34)).toFixed(4));
+      if (driveFlow.matches) {
+        /* Smartphone/Tablet hochkant: kein Anpinnen, der Film läuft beim Durchscrollen ab */
+        const sr = $('.drive-media', drive).getBoundingClientRect();
+        const q = clamp((vh * .98 - sr.top) / (vh * .98 - vh * .2));
+        drive.style.setProperty('--v', '1');
+        if (dv) scrubbers.get(dv).set(reduce ? 1 : q);
+        drive.style.setProperty('--sp', (reduce ? 1 : clamp((q - .15) / .6)).toFixed(4));
+      } else {
+        const dp = pinned(drive);
+        if (dv) scrubbers.get(dv).set(reduce ? 1 : clamp(dp * 1.35));
+        drive.style.setProperty('--sp', (reduce ? 1 : clamp((dp - .58) / .34)).toFixed(4));
+      }
     }
 
     if (gallery) galleryFrame(vh);

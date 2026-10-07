@@ -608,3 +608,59 @@ img, svg, video { display: block; max-width: 100%; }
 @media (max-width: 767px) {
   .kb img { transform: scale(calc(1.01 + var(--s) * .05)) translate3d(0, calc((var(--s) - .5) * -1%), 0); }
 }
+
+/* ==========================================================
+   V4 · Feinschliff nach Smartphone-Durchsicht (07.10.2026)
+   ========================================================== */
+
+/* Film: insgesamt etwas heller */
+.film-shade { background: radial-gradient(ellipse at 60% 40%, transparent 40%, rgba(0, 0, 0, .4) 100%), linear-gradient(90deg, rgba(4, 5, 8, .7) 0%, rgba(4, 5, 8, .24) 44%, transparent 72%), linear-gradient(180deg, transparent 58%, rgba(4, 5, 8, .62) 100%); }
+.scene.framed .kb img { filter: brightness(1.06); }
+
+/* Fahrzeug: Ausstattung als freier Text oberhalb des Fahrzeugs */
+.specs { top: calc(var(--head) + 40px); bottom: auto; }
+.specs li { border: 0; border-radius: 0; background: none; -webkit-backdrop-filter: none; backdrop-filter: none; padding: 0 8px 0 0; text-shadow: 0 2px 18px rgba(0, 0, 0, .65); }
+.specs span { color: rgba(255, 255, 255, .88); }
+.drive-shade { background: linear-gradient(180deg, rgba(7, 8, 12, calc(.35 + var(--sp) * .3)) 0%, rgba(7, 8, 12, calc(var(--sp) * .2)) 26%, transparent 42%, transparent 72%, rgba(7, 8, 12, .55) 100%); }
+
+/* Flughäfen: Hinweis auf alle weiteren Flughäfen */
+.board-more { display: flex; align-items: center; gap: 14px; margin: 10px 0 0; padding: 14px; border: 1px dashed rgba(231, 200, 143, .35); border-radius: 4px; color: var(--mute-l); font-size: .9rem; line-height: 1.45; }
+.board-more > span:first-child { display: grid; flex: none; width: 34px; height: 34px; place-items: center; border: 1px solid rgba(231, 200, 143, .6); border-radius: 50%; color: var(--gold-hi); font-size: 1.15rem; }
+.board-more strong { display: block; color: #fff; font-weight: 600; }
+
+/* Smartphone und Tablet hochkant: Fahrzeugbereich ohne Anpinnen, kein Leerraum */
+@media (max-width: 767px), (max-width: 1024px) and (orientation: portrait) {
+  .vehicle { padding-bottom: 48px; }
+  .drive { height: auto; margin-top: 26px; }
+  .drive-stage { position: relative; display: flex; flex-direction: column; height: auto; overflow: visible; }
+  .drive-caption { position: relative; inset: auto; order: 0; margin: 0 20px 20px; opacity: 1; }
+  .specs { position: relative; inset: auto; order: 1; margin: 0 20px; grid-template-columns: 1fr 1fr; gap: 16px 22px; }
+  .specs li, .specs li:nth-child(4) { grid-column: auto; padding: 0; gap: 2px; }
+  .specs li:nth-child(5) { grid-column: 1 / -1; }
+  .drive-media { position: relative; inset: auto; order: 2; width: 100%; aspect-ratio: 4 / 3; margin-top: -6px; border-radius: 0; transform: none; -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 86%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, #000 20%, #000 86%, transparent 100%); }
+  .drive-shade { display: none; }
+}
+
+@media (max-width: 767px) {
+  /* Hero: Bild beginnt unter der Kopfzeile, reicht weiter nach unten, gleicher Bildausschnitt */
+  .hero .media { top: var(--head); height: 58svh; -webkit-mask-image: linear-gradient(180deg, #000 76%, transparent 100%); mask-image: linear-gradient(180deg, #000 76%, transparent 100%); }
+  .hero-shade { background: linear-gradient(180deg, rgba(4, 5, 8, .3) 0%, rgba(4, 5, 8, .02) 20%, rgba(4, 5, 8, .08) 42%, rgba(4, 5, 8, .62) 60%, rgba(4, 5, 8, .95) 72%, var(--ink) 82%); }
+  .place-tag { top: calc(var(--head) + 58svh - 6px); bottom: auto; opacity: clamp(0, calc((var(--h) - .3) * 5), 1); }
+  .hero-beat { top: calc(var(--head) + 58svh + 12svh); }
+  .hero-stage::after { display: none; }
+
+  /* Film: weiterer, hellerer Bildausschnitt oben, Text darunter (wie beim Kurhaus) */
+  .scene.framed .kb, .scene.framed .media { top: var(--head); bottom: auto; height: min(125vw, 62svh); -webkit-mask-image: linear-gradient(180deg, #000 70%, transparent 100%); mask-image: linear-gradient(180deg, #000 70%, transparent 100%); }
+  .scene.framed .media { background: transparent; }
+  .scene.framed .kb img { filter: none; }
+  .film-shade { background: linear-gradient(180deg, rgba(4, 5, 8, .25) 0%, transparent 18%, rgba(4, 5, 8, .12) 40%, rgba(4, 5, 8, .72) 60%, rgba(4, 5, 8, .94) 76%, rgba(4, 5, 8, .97) 100%); }
+
+  /* Leistungskarten: weicher Übergang vom Bild in den Text wie am Laptop */
+  .card::after { background: none; }
+  .card-media::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, rgba(4, 5, 8, .12) 0%, transparent 26%, rgba(4, 5, 8, .3) 52%, rgba(4, 5, 8, .78) 80%, var(--ink) 100%); }
+  .card-body { margin-top: -96px; padding-top: 30px; background: linear-gradient(180deg, transparent 0, rgba(4, 5, 8, .6) 40px, var(--ink) 96px); }
+}
+@media (max-width: 767px) {
+  .specs strong { font-size: 1.3rem; }
+  .specs span { font-size: .88rem; line-height: 1.42; }
+}
