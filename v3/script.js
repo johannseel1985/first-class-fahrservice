@@ -73,7 +73,7 @@
         lazy.unobserve(e.target);
       });
     }, { rootMargin: '150% 0px' });
-    $$('.hero, .film').forEach((s) => lazy.observe(s));
+    $$('.hero, .film, .drive').forEach((s) => lazy.observe(s));
   }
   // iOS: Videos einmal mit einer Geste „aufwecken“, damit Seeking zuverlässig klappt
   const prime = () => {
@@ -116,7 +116,6 @@
   const clockLabel = $('.hud-label');
   const clockIndex = $('.hud-index');
   const drive = $('[data-drive]');
-  const cards = $$('.card');
   const steps = $('[data-steps]');
   const stepItems = $$('.step');
   const airports = $('.airports');
@@ -133,6 +132,108 @@
   ];
   const fmt = (m) => `${String(Math.floor(m / 60) % 24).padStart(2, '0')}:${String(Math.floor(m % 60)).padStart(2, '0')}`;
   let lastCaption = -1;
+  let routeMax = 0;
+
+
+  /* ---------- Leistungen: Galerie ---------- */
+  const gallery = $('[data-gallery]');
+  const track = gallery && $('[data-track]', gallery);
+  const gCards = gallery ? $$('[data-card]', gallery) : [];
+  const gIndex = gallery && $('[data-gallery-index]', gallery);
+  const desktopGallery = () => window.innerWidth >= 1025 && !reduce;
+  let gOverflow = 0;
+  let gActive = -1;
+
+  const setupGallery = () => {
+    if (!gallery) return;
+    if (desktopGallery()) {
+      gallery.classList.add('pinned');
+      track.style.setProperty('--gx', '0px');
+      gOverflow = Math.max(track.scrollWidth - window.innerWidth, 0);
+      gallery.style.setProperty('--gh', `${gOverflow + window.innerHeight * 1.15}px`);
+    } else {
+      gallery.classList.remove('pinned');
+      gallery.style.removeProperty('--gh');
+      track.style.setProperty('--gx', '0px');
+      gOverflow = 0;
+    }
+  };
+
+  const playCard = (card, on) => {
+    const v = $('video', card);
+    if (!v) return;
+    if (on) {
+      if (!v.src) v.src = v.dataset.src;
+      v.play().then(() => card.classList.add('playing')).catch(() => {});
+    } else {
+      v.pause();
+      card.classList.remove('playing');
+    }
+  };
+
+  const setActive = (i) => {
+    if (i === gActive) return;
+    gActive = i;
+    gCards.forEach((c, k) => {
+      c.classList.toggle('on', k === i);
+      if (!c.matches(':hover')) playCard(c, k === i && !reduce);
+    });
+    if (gIndex) gIndex.textContent = String(i + 1).padStart(2, '0');
+  };
+
+  function galleryFrame(vh) {
+    if (!gallery) return;
+    const vw = window.innerWidth;
+    let p;
+    if (gallery.classList.contains('pinned')) {
+      p = pinned(gallery);
+      track.style.setProperty('--gx', `${(-p * gOverflow).toFixed(1)}px`);
+    } else {
+      p = track.scrollLeft / Math.max(track.scrollWidth - track.clientWidth, 1);
+      const r = gallery.getBoundingClientRect();
+      if (r.bottom < 0 || r.top > vh) return;
+    }
+    gallery.style.setProperty('--gp', p.toFixed(4));
+    let best = 0;
+    let bestD = Infinity;
+    gCards.forEach((c, k) => {
+      const r = c.getBoundingClientRect();
+      const center = r.left + r.width / 2;
+      const d = Math.abs(center - vw / 2);
+      if (d < bestD) { bestD = d; best = k; }
+      c.style.setProperty('--kx', `${(((center - vw / 2) / vw) * -6).toFixed(2)}%`);
+    });
+    best = Math.round(p * (gCards.length - 1));
+    const r = gallery.getBoundingClientRect();
+    if (r.top < vh * .75 && r.bottom > vh * .25) setActive(best);
+  }
+
+  if (gallery) {
+    track.addEventListener('scroll', request, { passive: true });
+    gCards.forEach((card) => {
+      card.addEventListener('pointermove', (e) => {
+        if (e.pointerType !== 'mouse' || reduce) return;
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width;
+        const y = (e.clientY - r.top) / r.height;
+        card.classList.add('tilt');
+        card.style.setProperty('--ry', `${((x - .5) * 10).toFixed(2)}deg`);
+        card.style.setProperty('--rx', `${((.5 - y) * 8).toFixed(2)}deg`);
+        card.style.setProperty('--mx', `${(x * 100).toFixed(1)}%`);
+        card.style.setProperty('--my', `${(y * 100).toFixed(1)}%`);
+      });
+      card.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') playCard(card, true); });
+      card.addEventListener('pointerleave', () => {
+        card.classList.remove('tilt');
+        card.style.setProperty('--rx', '0deg');
+        card.style.setProperty('--ry', '0deg');
+        if (!card.classList.contains('on')) playCard(card, false);
+      });
+    });
+    setupGallery();
+    window.addEventListener('resize', () => { setupGallery(); request(); }, { passive: true });
+    window.addEventListener('load', () => { setupGallery(); request(); });
+  }
 
   /* ---------- Hauptschleife ---------- */
   let queued = false;
@@ -196,16 +297,15 @@
       clock.textContent = fmt(from + (to - from) * e);
     }
 
-    if (drive) drive.style.setProperty('--v', (reduce ? 1 : ease(clamp(through(drive, 1, .55) * 1.25))).toFixed(4));
-
-    if (!isMobile() && !reduce) {
-      cards.forEach((c) => {
-        const r = c.getBoundingClientRect();
-        if (r.bottom < -100 || r.top > vh + 100) return;
-        const off = (r.top + r.height / 2 - vh / 2) * -.07;
-        c.style.setProperty('--py', off.toFixed(1));
-      });
+    if (drive) {
+      const r = drive.getBoundingClientRect();
+      const enter = clamp((vh - r.top) / vh);
+      drive.style.setProperty('--v', (reduce ? 1 : ease(enter)).toFixed(4));
+      const dv = $('video.scrub', drive);
+      if (dv) scrubbers.get(dv).set(reduce ? 1 : clamp(pinned(drive) * 1.15));
     }
+
+    if (gallery) galleryFrame(vh);
 
     if (steps) {
       const p = reduce ? 1 : through(steps, .82, .5);
@@ -214,9 +314,12 @@
     }
 
     if (airports && !selected) {
-      const p = reduce ? 1 : through(airports, .7, .1);
+      const grid = $('.airports-grid', airports);
+      const gt = grid.getBoundingClientRect().top;
+      const p = reduce ? 1 : clamp((vh * .95 - gt) / (vh * .55));
+      routeMax = Math.max(routeMax, p);
       routeCodes.forEach((code, i) => {
-        const local = clamp((p - i * .1) / .35);
+        const local = clamp((routeMax - i * .12) / .4);
         $$(`[data-route="${code}"]`, airports).forEach((el) => el.style.setProperty('--r', local.toFixed(3)));
       });
     }
@@ -311,7 +414,7 @@
     });
     const row = rows.find((r) => r.dataset.route === code);
     const name = $('.dest strong', row).textContent;
-    detail.innerHTML = `<strong>${name}</strong> · ${$('.km', row).textContent} · ca. ${$('.time', row).dataset.flap.replace(':', ' Std. ').replace(/^0 Std\. /, '')} Min. Fahrt.<br>Empfohlene Abholung: ${$('.pick', row).textContent} Abflug.`;
+    detail.innerHTML = `<strong>${name}</strong> · ${$('.km', row).textContent} · ca. ${$('.time', row).dataset.flap.replace(':', ' Std. ').replace(/^0 Std\. /, '')} Min. Fahrt.<br>Die Abholzeit stimmen wir persönlich mit Ihnen ab.`;
     boardCta.hidden = false;
     boardCta.textContent = `Transfer nach ${code.toUpperCase()} anfragen`;
     boardCta.dataset.name = row.dataset.name;
